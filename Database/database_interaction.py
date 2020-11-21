@@ -10,3 +10,11 @@ def get_all_descriptions():
         for row in csv_reader:
             course_desc[row['index']] = row['description']
         return course_desc
+
+
+def get_all_courses():
+    return 'All courses'
+
+
+def get_course_by_id(id):
+    return 'This is book with the id'
