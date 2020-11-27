@@ -2,7 +2,8 @@ import mysql.connector
 
 
 def get_all_courses():
-    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True, charset='utf8')
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
     cursor = mydb.cursor()
 
     query = 'SELECT id, name, rating, website FROM courses'
@@ -25,7 +26,8 @@ def get_all_courses():
 
 
 def get_course_by_id(id_course):
-    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True, charset='utf8')
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
     cursor = mydb.cursor()
 
     query = 'SELECT * FROM courses where id = ' + str(id_course)
@@ -45,7 +47,8 @@ def get_course_by_id(id_course):
 
 
 def get_all_descriptions():
-    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True, charset='utf8')
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
     cursor = mydb.cursor()
 
     query = 'SELECT id, description FROM courses'
@@ -57,25 +60,25 @@ def get_all_descriptions():
     data = cursor.fetchall()
     cursor.close()
 
-    result = list((d[0], d[1][1:-1]) for d in data)
+    result = {}
+    for d in data:
+        result[d[0]] = d[1][1:-1]
 
     return result
 
 
 def get_courses_by_ids(ids):
-    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True, charset='utf8')
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
     cursor = mydb.cursor()
+    format_strings = ','.join(['%s'] * len(ids))
+    try:
+        cursor.execute("SELECT id, name, rating, website FROM courses where id IN (%s)" % format_strings, tuple(ids))
+    except Exception as e:
+        print(e)
 
-    data = []
     header = [x[0] for x in cursor.description]
-    for course_id in ids:
-        query = 'SELECT id, name, rating, website FROM courses where id = ' + str(course_id)
-        try:
-            cursor.execute(query)
-        except Exception as e:
-            print(e)
-
-        data += [cursor.fetchone()]
+    data = cursor.fetchall()
 
     cursor.close()
 
