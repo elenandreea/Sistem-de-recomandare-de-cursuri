@@ -1,4 +1,5 @@
 import mysql.connector
+import time
 
 
 def get_all_courses():
@@ -71,6 +72,7 @@ def get_courses_by_ids(ids):
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
                                    charset='utf8')
     cursor = mydb.cursor()
+    start_time = time.time()
     format_strings = ','.join(['%s'] * len(ids))
     try:
         cursor.execute("SELECT id, name, rating, website FROM courses where id IN (%s)" % format_strings, tuple(ids))
@@ -80,6 +82,37 @@ def get_courses_by_ids(ids):
     header = [x[0] for x in cursor.description]
     data = cursor.fetchall()
 
+    print(time.time() - start_time)
+    cursor.close()
+
+    result = []
+    for d in data:
+        name = d[1][1:-1]
+        website = d[3][1:-1]
+        result.append(dict(zip(header, (d[0], name, d[2], website))))
+
+    return result
+
+
+def get_courses_by_ids_ms(ids):
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
+    cursor = mydb.cursor()
+
+    header = []
+    data = []
+    start_time = time.time()
+    for course_id in ids:
+        query = 'SELECT id, name, rating, website FROM courses where id = ' + str(course_id)
+        try:
+            cursor.execute(query)
+        except Exception as e:
+            print(e)
+
+        header = [x[0] for x in cursor.description]
+        data += [cursor.fetchone()]
+
+    print(time.time() - start_time)
     cursor.close()
 
     result = []

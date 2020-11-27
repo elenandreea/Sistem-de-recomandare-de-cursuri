@@ -1,7 +1,7 @@
 import spacy
 
 
-from Database.database_interaction import get_all_descriptions, get_courses_by_ids
+from Database.database_interaction import get_all_descriptions, get_courses_by_ids, get_courses_by_ids_ms
 
 nlp = spacy.load("en_core_web_lg")
 
@@ -22,9 +22,7 @@ def process_text(text):
 
 def calculate_similarity(text1, text2):
     text2 = nlp(process_text(text2))
-    if text1 and text2:
-        return text1.similarity(text2)
-    return 0
+    return text1.similarity(text2)
 
 
 def find_best_description_similarity(id_course):
