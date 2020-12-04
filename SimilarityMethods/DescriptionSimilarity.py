@@ -1,6 +1,7 @@
 import spacy
 
-from Database.database_interaction import get_courses_by_ids
+from Database.DBInteractCourses import get_courses_by_ids
+from Database.DBProcessDescription import get_all_embeddings
 
 nlp = spacy.load("en_core_web_lg")
 
@@ -10,7 +11,8 @@ def calculate_similarity(text1, text2):
     return text1.similarity(text2)
 
 
-def find_best_description_similarity(id_course, new_courses):
+def find_best_description_similarity(id_course):
+    new_courses = get_all_embeddings()
     description_course = nlp(new_courses[id_course])
     del new_courses[id_course]
 
@@ -22,8 +24,8 @@ def find_best_description_similarity(id_course, new_courses):
     return similar_courses
 
 
-def get_similar_courses(course_id, processed_courses):
-    sim_courses = find_best_description_similarity(course_id, processed_courses)
+def get_similar_courses(course_id):
+    sim_courses = find_best_description_similarity(course_id)
     sim_courses.sort(key=lambda x: x[1], reverse=True)
     sim_ids = [c[0] for c in sim_courses]
     if len(sim_ids) > 10:

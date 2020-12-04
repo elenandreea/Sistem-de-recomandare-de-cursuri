@@ -1,4 +1,5 @@
-from Database.database_interaction import get_all_descriptions
+from Database.DBInteractCourses import get_all_descriptions
+from Database.DBProcessDescription import insert_row_into_embeddings_table
 import spacy
 
 nlp = spacy.load("en_core_web_lg")
@@ -22,7 +23,12 @@ def process_single_text(text):
 
 def process_all_descriptions():
     courses = get_all_descriptions()
-    processed_courses = {}
+
     for k_id, v_desc in courses.items():
-        processed_courses[k_id] = process_single_text(v_desc)
-    return processed_courses
+        processed_desc = process_single_text(v_desc)
+        insert_row_into_embeddings_table(k_id, processed_desc)
+    return True
+
+
+# if __name__ == '__main__':
+#     process_all_descriptions()
