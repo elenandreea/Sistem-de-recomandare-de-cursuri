@@ -2,10 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from Database.database_interaction import *
 from Database.database_user import checkUser
-from SimilarityMethods.cosine_similarity_spacy import get_similar_courses
+from SimilarityMethods.DescriptionSimilarity import get_similar_courses
+from SimilarityMethods.ProcessText import process_all_descriptions
+import copy
 
 app = Flask(__name__)
 CORS(app)
+
+processed_courses_desc = process_all_descriptions()
+print("Descrierile au fost incarcate")
 
 
 @app.route("/allCourses")
@@ -26,7 +31,11 @@ def course_by_id():
 def similar_courses():
     course_id = 2830
     # course_id = request.json['idCourse']
-    result = get_similar_courses(course_id)
+    start_time = time.time()
+    copy_desc = copy.deepcopy(processed_courses_desc)
+    print(time.time() - start_time)
+    result = get_similar_courses(course_id, copy_desc)
+    print(len(processed_courses_desc))
     return jsonify(result)
 
 
