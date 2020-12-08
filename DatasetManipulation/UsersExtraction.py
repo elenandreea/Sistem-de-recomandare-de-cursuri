@@ -64,7 +64,6 @@ def write_users_review_to_csv():
             csv_writer.writerow([reviewer, course_id, result[reviewer, course_id]])
 
 
-#NOT DONE
 def insert_into_users_table():
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
                                    charset='utf8')
