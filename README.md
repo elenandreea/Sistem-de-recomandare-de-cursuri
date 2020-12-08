@@ -2,3 +2,5 @@
 
 mysql server community
 mysql workbench
+
+ pip install Flask-Caching
