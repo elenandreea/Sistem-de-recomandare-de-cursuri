@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
+from CollaborativeFilter.UserRecomandation import collaborative_users
 from Database.DBInteractCourses import *
 from Database.DBUser import checkUser
 from SimilarityMethods.DescriptionSimilarity import get_similar_courses
@@ -35,6 +37,13 @@ def login():
     username = request.json('username')
     password = request.json('password')
     result = checkUser(username, password)
+    return jsonify(result)
+
+
+@app.route("/recommandUsers", methods=['POST', 'GET'])
+def recommandUsers():
+    course_name = 'Financial Markets'
+    result = collaborative_users(course_name)
     return jsonify(result)
 
 
