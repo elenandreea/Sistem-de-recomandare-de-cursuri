@@ -40,7 +40,7 @@ def fuzzy_matching(mapper, fav_course, verbose=True):
 # In[25]:
 
 
-def make_recommendation(model_knn, data, mapper, fav_course, n_recommendations):
+def make_recommendation(model_knn, data, mapper, fav_course, df_courses, n_recommendations):
     """
     return top n similar course recommendations based on user's input course
     Parameters
@@ -59,7 +59,6 @@ def make_recommendation(model_knn, data, mapper, fav_course, n_recommendations):
     # get input course index
     print('You have input course:', fav_course)
     idx = fuzzy_matching(mapper, fav_course, verbose=True)
-    print("idx: ", idx, "data[idx]: ", data[idx])
 
     print('Recommendation system start to make inference')
     print('......\n')
@@ -71,9 +70,12 @@ def make_recommendation(model_knn, data, mapper, fav_course, n_recommendations):
     # get reverse mapper
     reverse_mapper = {v: k for k, v in mapper.items()}
     # print recommendations
+    recommended_courses = []
     print('Recommendations for {}:'.format(fav_course))
     for i, (idx, dist) in enumerate(raw_recommends):
-        print('{0}: {1} - {2}, with distance of {3}'.format(i + 1, idx, reverse_mapper[idx], dist))
+        print('{0}: {1} - {2}, with distance of {3}'.format(i + 1, df_courses.course_id[idx], reverse_mapper[idx], dist))
+        recommended_courses.append(df_courses.course_id[idx])
+    return recommended_courses
 
 
 def collaborative_users(my_course):
@@ -148,14 +150,16 @@ def collaborative_users(my_course):
     # fit
     model_knn.fit(mat_courses_features)
 
-    make_recommendation(
+    recommended_courses = make_recommendation(
         model_knn=model_knn,
         data=mat_courses_features,
         fav_course=my_course,
+        df_courses=df_courses,
         mapper=course_to_idx,
         n_recommendations=10)
 
-    # print(course_to_idx)
+    print(recommended_courses)
+    return recommended_courses
 
 
 if __name__ == '__main__':
