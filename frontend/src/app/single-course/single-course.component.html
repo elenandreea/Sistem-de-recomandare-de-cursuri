@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+
+<div class="row course_row">
+    <div class="img_container">
+        <img class="img_logo" src="../../assets/logo_SAC.png">
+    </div>
+</div>
+
+<div class="row course_row title">
+    <h1>{{course.name}}</h1>
+</div>
+
+
+<div class="row course_row">
+    <div class="col-4">
+        <img *ngIf="isUdemy" class="img_course" src="../../assets/udemy_logo.png">
+        <img *ngIf="!isUdemy" class="img_course" src="../../assets/coursera_logo.png">
+    </div>
+    <div class="col-8">
+        <div class="row">
+            <div class="col-4 attr_name">
+                Tags
+            </div>
+            <div class="col-8 attr_prop">
+                {{course.tags}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 attr_name">
+                Difficulty:
+            </div>
+            <div class="col-8 attr_prop">
+                {{course.difficulty}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 attr_name">
+                Description
+            </div>
+            <div class="col-8 attr_prop">
+                {{course.description}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 attr_name">
+                Rating
+            </div>
+            <div class="col-8 attr_prop">
+                {{course.rating}}/5
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 attr_name">
+                Course site
+            </div>
+            <div class="col-8 attr_prop">
+                <a href="{{course.url}}">{{course.url}}</a>"
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row course_row similar_courses">
+    <h3>Similar courses:</h3>
+</div>
+
+<div class="row course_row">
+    <div class="course_container">
+        <app-recommended-course course]=similarCourses[0]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[0]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course course]=similarCourses[1]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[1]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course course]=similarCourses[2]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[2]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course course]=similarCourses[3]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[3]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course course]=similarCourses[4]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[4]></app-course-list-elem> -->
+    </div>
+</div>

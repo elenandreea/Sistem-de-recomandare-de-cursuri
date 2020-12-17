@@ -1,0 +1,63 @@
+.course_info{
+    background-color: #008080;
+    height: 400px;
+    color: #fff;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    margin-bottom: 34px;
+    padding-top: 2%;
+    border-radius: 10px;
+}
+
+.logo_site {
+    width: 100%;
+    background: #fff;
+    display:block;
+    margin:auto;
+}
+
+.img_container {
+    width: 90%;
+    height: 48%;
+    margin-left: 5%;
+    display: flex;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.tags {
+    padding-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
+
+.desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+    padding-left: 20px;
+}
+
+.dif_rat_container{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    color: #e6b800;
+}
+
+.title {
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    -webkit-box-orient: vertical;
+}
