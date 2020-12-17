@@ -158,7 +158,7 @@ def collaborative_users(my_course):
         mapper=course_to_idx,
         n_recommendations=10)
 
-    print(recommended_courses)
+    # print(recommended_courses)
     return recommended_courses
 
 
