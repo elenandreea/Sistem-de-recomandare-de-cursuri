@@ -34,8 +34,8 @@ export class SingleCourseComponent implements OnInit {
   ngOnInit(): void {
     var id = this.route.snapshot.paramMap.get('courseId');
     console.log(id);
-    // this.getCourse(id);
-    // this.getSimilarCourses(id);
+    this.getCourse(id);
+    this.getSimilarCourses(id);
   }
 
   getCourse(id : String): void {
