@@ -43,6 +43,16 @@ Thumbs.db
 # Remove file from frontend #
 frontend/.browserslistrc
 frontend/.editorconfig
+./frontend/.browserslistrc
+./frontend/.editorconfig
+
 
 .idea/*
 ./.idea
+
+CollaborativeFilter/__pycache__/*
+Database/__pycache__/*
+SimilarityMethods/__pycache__/*
+./CollaborativeFilter/__pycache__/*
+./Database/__pycache__/*
+./SimilarityMethods/__pycache__/*
