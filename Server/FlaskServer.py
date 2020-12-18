@@ -59,8 +59,8 @@ def recommandUsers():
     # course_id = int(data["idCourse"])
     # print(course_id)
 
-    course_name = 'Financial Markets'
-    result = collaborative_users(course_name)
+    course_name = 'Getting Started with SAS Programming'
+    result = get_courses_by_ids(collaborative_users(course_name))
     return jsonify(result)
 
 

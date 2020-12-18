@@ -23,11 +23,10 @@ export class SingleCourseComponent implements OnInit {
 
   ngOnInit(): void {
     var id = this.route.snapshot.paramMap.get('courseId');
-    console.log(id);
     if(id) {
       this.getCourse(id);
-      // this.getSimilarCourses(id);
-      this.getRecommandUsers(id);
+      this.getSimilarCourses(id);
+      // this.getRecommandUsers(id);
     }
     
   }
@@ -36,6 +35,7 @@ export class SingleCourseComponent implements OnInit {
     this.courseService.getCourse(id)
     .subscribe((course: Course) => {
       this.course = course;
+      this.getRecommandUsers(course.name)
     });
   }
 
@@ -45,7 +45,6 @@ export class SingleCourseComponent implements OnInit {
   }
 
   getRecommandUsers(id : String): void {
-    console.log("AICI")
     this.courseService.getRecommandUsers(id)
     .subscribe(courses => this.recommandUsers = courses)
   }
