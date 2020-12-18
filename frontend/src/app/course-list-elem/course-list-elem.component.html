@@ -1,0 +1,14 @@
+<div class= "course_info" [routerLink] = route>
+    <h5 class="tags">{{course.tags}}</h5>
+    <div class="img_container">
+        <img *ngIf="!showUdemy" class="logo_site" src="../../assets/coursera_logo.png">
+        <img *ngIf="showUdemy" class="logo_site" src="../../assets/udemy_logo.png">
+    </div>
+    <h5 class="tags title">{{course.name}}</h5>
+    <p class="desc">{{course.description}}</p>
+    <div class="dif_rat_container">
+        <div>{{course.difficulty}} </div>
+        <div>{{course.rating}}</div>
+        
+    </div>
+</div>
