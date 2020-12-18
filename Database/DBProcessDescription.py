@@ -7,6 +7,12 @@ def create_embeddings_table():
     cursor.execute("CREATE TABLE embeddings(id INT NOT NULL PRIMARY KEY, embed LONGTEXT)")
     db.close()
 
+def delete_data_embeddings_table():
+    db = mysql.connector.connect(host='localhost', user='root', passwd='admin', database='recommendation')
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM recommendation.embeddings")
+    db.close()
+
 
 def insert_row_into_embeddings_table(row_id, row_desc):
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
@@ -42,6 +48,7 @@ def get_all_embeddings():
         result[d[0]] = d[1][1:-1]
 
     return result
-
+#
 # if __name__ == '__main__':
 #     create_embeddings_table()
+#     delete_data_embeddings_table()

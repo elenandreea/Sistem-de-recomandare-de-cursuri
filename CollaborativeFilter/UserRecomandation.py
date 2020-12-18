@@ -159,12 +159,16 @@ def collaborative_users(my_course):
         n_recommendations=10)
 
     # print(recommended_courses)
-    return recommended_courses
+    # return recommended_courses
 
+    new_list = []
+    for c in recommended_courses:
+        new_list.append(c.item())
+    return new_list
 
-if __name__ == '__main__':
-    collaborative_users('Financial Markets')
-
+# if __name__ == '__main__':
+#     collaborative_users('Financial Markets')
+#
 
 
 
