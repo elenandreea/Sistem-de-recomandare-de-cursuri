@@ -43,3 +43,6 @@ Thumbs.db
 # Remove file from frontend #
 frontend/.browserslistrc
 frontend/.editorconfig
+
+.idea/*
+./.idea
