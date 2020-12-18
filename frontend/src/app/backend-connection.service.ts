@@ -33,7 +33,7 @@ export class BackendConnectionService {
   /** GET hero by id. Will 404 if id not found */
   getCourse(id : String): Observable<Course> {
     const url = `${this.API_URL}CourseById`;
-    return this.http.post<Course>(url, JSON.stringify({'idCourse': id})).pipe(
+    return this.http.post<Course>(url, JSON.stringify({'idCourse':id})).pipe(
       tap(_ => ''),
       catchError(this.handleError<Course>(`getCourse id=${id}`))
     );
@@ -41,17 +41,17 @@ export class BackendConnectionService {
 
   getSimilarCourses(id : String): Observable<Course[]> {
     const url = `${this.API_URL}similarCourses`;
-    return this.http.post<Course[]>(url, JSON.stringify({'idCourse': id})).pipe(
+    return this.http.post<Course[]>(url, JSON.stringify({'idCourse':id})).pipe(
       tap(_ => ''),
       catchError(this.handleError<Course[]>(`getSimilarCourses id=${id}`))
     );
   }
 
-  getRecommandUsers(name : String): Observable<Course[]> {
+  getRecommandUsers(id : String): Observable<Course[]> {
     const url = `${this.API_URL}recommandUsers`;
-    return this.http.post<Course[]>(url, JSON.stringify({'nameCourse': name})).pipe(
+    return this.http.post<Course[]>(url, JSON.stringify({'idCourse':id})).pipe(
       tap(_ => ''),
-      catchError(this.handleError<Course[]>(`getSimilarCourses nameCourse=${name}`))
+      catchError(this.handleError<Course[]>(`getRecommandUsers id=${id}`))
     );
   }
 

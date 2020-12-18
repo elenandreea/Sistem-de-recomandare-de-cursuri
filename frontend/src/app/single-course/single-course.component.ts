@@ -27,6 +27,7 @@ export class SingleCourseComponent implements OnInit {
     if(id) {
       this.getCourse(id);
       // this.getSimilarCourses(id);
+      this.getRecommandUsers(id);
     }
     
   }
@@ -35,7 +36,6 @@ export class SingleCourseComponent implements OnInit {
     this.courseService.getCourse(id)
     .subscribe((course: Course) => {
       this.course = course;
-      this.getRecommandUsers(this.course.name);
     });
   }
 
@@ -44,9 +44,9 @@ export class SingleCourseComponent implements OnInit {
     .subscribe(courses => this.similarCourses = courses)
   }
 
-  getRecommandUsers(name: String): void {
+  getRecommandUsers(id : String): void {
     console.log("AICI")
-    this.courseService.getRecommandUsers(name)
+    this.courseService.getRecommandUsers(id)
     .subscribe(courses => this.recommandUsers = courses)
   }
 }

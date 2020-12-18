@@ -40,8 +40,7 @@ def similar_courses():
     course_id = int(data["idCourse"])
 
     result = get_similar_courses(course_id)
-    print(result)
-    print("rezultate")
+
     return jsonify(result)
 
 
@@ -55,6 +54,11 @@ def login():
 
 @app.route("/recommandUsers", methods=['POST', 'GET'])
 def recommandUsers():
+
+    # data = json.loads(request.data.decode())
+    # course_id = int(data["idCourse"])
+    # print(course_id)
+
     course_name = 'Financial Markets'
     result = collaborative_users(course_name)
     return jsonify(result)
