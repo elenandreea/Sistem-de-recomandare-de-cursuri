@@ -47,6 +47,14 @@ export class BackendConnectionService {
     );
   }
 
+  getRecommandUsers(name : String): Observable<Course[]> {
+    const url = `${this.API_URL}recommandUsers`;
+    return this.http.post<Course[]>(url, JSON.stringify({'nameCourse': name})).pipe(
+      tap(_ => ''),
+      catchError(this.handleError<Course[]>(`getSimilarCourses nameCourse=${name}`))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   
