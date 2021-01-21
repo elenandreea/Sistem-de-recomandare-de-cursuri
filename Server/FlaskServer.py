@@ -16,10 +16,12 @@ def all_courses():
     result = get_all_courses()
     return jsonify(result)
 
+
 @app.route("/allCoursesDetails")
 def all_courses_detailed():
     result = get_top_100_courses_with_all_details()
     return jsonify(result)
+
 
 @app.route("/CourseById", methods=['POST', 'GET'])
 def course_by_id():

@@ -7,6 +7,7 @@ def create_embeddings_table():
     cursor.execute("CREATE TABLE embeddings(id INT NOT NULL PRIMARY KEY, embed LONGTEXT)")
     db.close()
 
+
 def delete_data_embeddings_table():
     db = mysql.connector.connect(host='localhost', user='root', passwd='admin', database='recommendation')
     cursor = db.cursor()

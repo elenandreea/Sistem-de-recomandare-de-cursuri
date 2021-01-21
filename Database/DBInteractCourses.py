@@ -25,6 +25,7 @@ def get_all_courses():
 
     return result
 
+
 def get_top_100_courses_with_all_details():
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
                                    charset='utf8')
