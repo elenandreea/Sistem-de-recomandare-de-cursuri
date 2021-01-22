@@ -5,10 +5,19 @@ from CollaborativeFilter.UserRecomandation import collaborative_users
 from Database.DBInteractCourses import *
 from Database.DBUser import checkUser
 from SimilarityMethods.DescriptionSimilarity import get_similar_courses
+from SimilarityMethods.RatingCommentSimilarity import get_similar_rating_comments
 import json
 
 app = Flask(__name__)
 CORS(app)
+
+
+@app.route("/login", methods=['POST', 'GET'])
+def login():
+    username = request.json('username')
+    password = request.json('password')
+    result = checkUser(username, password)
+    return jsonify(result)
 
 
 @app.route("/allCourses")
@@ -25,42 +34,31 @@ def all_courses_detailed():
 
 @app.route("/CourseById", methods=['POST', 'GET'])
 def course_by_id():
-    # course_id = 2830
-
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
-
     result = get_course_by_id(course_id)
     return jsonify(result)
 
 
 @app.route("/similarCourses", methods=['POST', 'GET'])
 def similar_courses():
-    # course_id = 2830
-
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
-
     result = get_similar_courses(course_id)
-
     return jsonify(result)
 
 
-@app.route("/login", methods=['POST', 'GET'])
-def login():
-    username = request.json('username')
-    password = request.json('password')
-    result = checkUser(username, password)
+@app.route("/similarReview", methods=['POST', 'GET'])
+def similar_courses():
+    course_id = 2830
+    # data = json.loads(request.data.decode())
+    # course_id = int(data["idCourse"])
+    result = get_similar_rating_comments(course_id)
     return jsonify(result)
 
 
 @app.route("/recommandUsers", methods=['POST', 'GET'])
 def recommandUsers():
-
-    # data = json.loads(request.data.decode())
-    # course_id = int(data["idCourse"])
-    # print(course_id)
-
     course_name = 'Getting Started with SAS Programming'
     result = get_courses_by_ids(collaborative_users(course_name))
     return jsonify(result)
