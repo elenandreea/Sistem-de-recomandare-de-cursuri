@@ -3,7 +3,7 @@ import spacy
 from Database.DBInteractCourses import get_courses_by_ids
 from Database.DBProcessDescription import get_all_embeddings
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_lg")
 
 
 def calculate_similarity(text1, text2):

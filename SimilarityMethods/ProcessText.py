@@ -2,7 +2,7 @@ from Database.DBInteractCourses import get_all_descriptions
 from Database.DBProcessDescription import insert_row_into_embeddings_table
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_lg")
 
 
 def process_single_text(text):

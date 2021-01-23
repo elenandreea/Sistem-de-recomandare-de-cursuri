@@ -5,7 +5,7 @@ from CollaborativeFilter.UserRecomandation import collaborative_users
 from Database.DBInteractCourses import *
 from Database.DBUser import checkUser
 from SimilarityMethods.DescriptionSimilarity import get_similar_courses
-from SimilarityMethods.RatingCommentSimilarity import get_similar_rating_comments
+from SimilarityMethods.RatingCommentSimilarity import get_similar_review_comments
 import json
 
 app = Flask(__name__)
@@ -49,11 +49,11 @@ def similar_courses():
 
 
 @app.route("/similarReview", methods=['POST', 'GET'])
-def similar_courses():
-    course_id = 2830
+def similar_course_reviews():
+    course_id = 2969
     # data = json.loads(request.data.decode())
     # course_id = int(data["idCourse"])
-    result = get_similar_rating_comments(course_id)
+    result = get_similar_review_comments(course_id)
     return jsonify(result)
 
 
