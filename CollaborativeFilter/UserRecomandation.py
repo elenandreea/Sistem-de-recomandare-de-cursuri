@@ -5,6 +5,7 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import matplotlib.pyplot as plt
 from fuzzywuzzy import fuzz
+import mysql.connector
 
 
 def fuzzy_matching(mapper, fav_course, verbose=True):
@@ -78,7 +79,27 @@ def make_recommendation(model_knn, data, mapper, fav_course, df_courses, n_recom
     return recommended_courses
 
 
-def collaborative_users(my_course):
+def get_course_name(course_id):
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
+    cursor = mydb.cursor(buffered=True)
+    sql_select_query = "select name from courses where id = %s"
+
+    try:
+        cursor.execute(sql_select_query, (course_id,))
+    except Exception as e:
+        print(e)
+        return None
+
+    data = cursor.fetchall()
+    cursor.close()
+    if not data:
+        return None
+    return data[0][0]
+
+
+def collaborative_users(course_id):
+    my_course = get_course_name(course_id)
     data_path = '../Datasets/'
     courses_filename = 'id_courses_coursera.csv'
     ratings_filename = 'user-course-rating.csv'
@@ -166,9 +187,10 @@ def collaborative_users(my_course):
         new_list.append(c.item())
     return new_list
 
+
 # if __name__ == '__main__':
-#     collaborative_users('Financial Markets')
-#
+#     collaborative_users(5753)
+
 
 
 
