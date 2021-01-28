@@ -105,7 +105,7 @@ def insert_into_users_table():
     cursor.close()
 
 
-def get_users_review():
+def get_users_rating():
     rows_db = get_id_and_url()
     keys_db = rows_db.keys()
     course_count = {}
@@ -140,8 +140,44 @@ def get_users_review():
     return result
 
 
+def get_users_rating_review():
+    rows_db = get_id_and_url()
+    keys_db = rows_db.keys()
+    course_count = {}
+
+    with open('../Datasets/Coursera_reviews_unique.csv', newline='', encoding="utf-8") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+
+        with open('../Datasets/user-course-rating-review.csv', 'w', encoding='utf-8') as new_csv_file:
+            fieldnames = ['user_id', 'course_id', 'rating', 'reviews']
+
+            csv_writer = csv.writer(new_csv_file)
+            csv_writer.writerow(fieldnames)
+
+            result = {}
+            for row_csv in csv_reader:
+                if row_csv['course_id'] in keys_db:
+                    course_id = rows_db[row_csv['course_id']]
+                    if course_id not in course_count:
+                        course_count[course_id] = 1
+                    else:
+                        course_count[course_id] += 1
+                        if course_count[course_id] > 100:
+                            continue
+                    reviewer = row_csv['reviewers'][3:]
+                    reviewer_id = get_id_for_user("'" + reviewer + "'")
+                    if reviewer_id is None:
+                        continue
+                    if (reviewer_id, row_csv['course_id']) not in result.keys():
+                        reviews = row_csv['reviews']
+                        result[(reviewer_id, course_id)] = float(row_csv['rating'])
+                        csv_writer.writerow([reviewer_id, course_id, result[reviewer_id, course_id], reviews])
+                        print(reviewer_id, course_id)
+    return result
+
+
 def write_users_review_to_csv():
-    result = get_users_review()
+    result = get_users_rating()
     print(len(result))
 
     with open('../Datasets/user-course-rating.csv', 'w', encoding='utf-8') as new_csv_file:
@@ -196,7 +232,7 @@ def insert_into_reviews_table():
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
                                    charset='utf8')
     cursor = mydb.cursor()
-    result = get_users_review()
+    result = get_users_rating()
 
     print("BEGIN INSERT")
 
