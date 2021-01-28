@@ -11,3 +11,36 @@
     margin-left: 100px;
     margin-right: 100px;
 }
+
+.left_side {
+    width: 18%;
+    float: left;
+    margin-left: 2%;
+}
+
+.right_side {
+    /* width: 80%; */
+}
+
+.left_margin {
+    margin-left: 50px;
+}
+
+.cont {
+    width: 100%;
+}
+
+.input_search {
+    border-radius: 5px;
+}
+
+.button_search{
+    margin-top: 20px;
+    padding-left: 70px;
+    padding-right: 70px;
+    font-size: 18px;
+    border-radius: 6px;
+    background: #008080;
+    color: white;
+    font-weight: bold;
+}

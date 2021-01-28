@@ -4,7 +4,7 @@ from Database.DBInteractCourses import get_courses_by_ids
 from Database.DBProcessReviewComments import get_all_review_embeddings
 from SimilarityMethods.DescriptionSimilarity import calculate_similarity
 
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_sm")
 
 
 def find_best_review_comment_similarity(id_course):

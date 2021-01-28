@@ -1,9 +1,89 @@
 <app-navbar></app-navbar>
-<div class="row course_row">
-    <h2>Top 200 courses:</h2>
-</div>
-<div class="row course_row">
-    <div class="course_container" *ngFor="let course of courses; let i = index">
-        <app-course-list-elem [course] = course ></app-course-list-elem>
+<div class="cont">
+    <div class="left_side">
+        <div>
+            <h3>Search:</h3>
+            <input type="text" class="left_margin input_search" value="search" />
+        </div>
+        <div>
+            <h3>Website:</h3>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_website" value="udemy" /> Udemy
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_website" value="coursera" /> Coursera
+            </label>
+        </div>
+        <div>
+            <h3>Difficulty:</h3>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_difficulty" value="all_levels" /> All Levels
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_difficulty" value="beginner" /> Beginner Level
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_difficulty" value="intermediate" /> Intermediate Level
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_difficulty" value="advanced" /> Advanced Level
+            </label>
+        </div>
+        <div>
+            <h3>Ratings:</h3>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_ratings" value="4" /> 4-5 Score
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_ratings" value="3" /> 3-4 Score
+            </label>
+            <br>
+            <label> 
+                <input type="checkbox" class="radio left_margin checkbox_ratings" value="2" /> 2-3 Score
+            </label>
+        </div>
+        <div>
+            <h3>Categories:</h3>
+            <label> 
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="computer_science" /> Computer Science
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="finance" /> Finance
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="data_science" /> Data Science
+            </label>
+            <br>
+            <label> 
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="health" /> Health
+            </label>
+            <br>
+            <label> 
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="engineering" /> Engineering
+            </label>
+            <br>
+            <label> 
+                <input type="checkbox" class="radio left_margin checkbox_categories" value="language_learning" /> Language Learning
+            </label>
+        </div>
+        <button type="button" class="button_search">Search</button>
     </div>
+    <div class="right_side">
+        <div class="row course_row">
+            <h2>Top 200 courses:</h2>
+        </div>
+        <div class="row course_row">
+            <div class="course_container" *ngFor="let course of courses; let i = index">
+                <app-course-list-elem [course] = course ></app-course-list-elem>
+            </div>
+        </div>
+    </div>
+
 </div>
