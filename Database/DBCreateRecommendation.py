@@ -16,6 +16,13 @@ def create_courses_table():
         "CREATE TABLE courses(id INT AUTO_INCREMENT PRIMARY KEY, name MEDIUMTEXT, url MEDIUMTEXT, rating DOUBLE, difficulty TEXT, tags TEXT,website MEDIUMTEXT, description LONGTEXT)")
     db.close()
 
+def create_review_table():
+    db = mysql.connector.connect(host='localhost', user='root', passwd='admin', database='recommendation')
+    mycursor = db.cursor()
+    mycursor.execute(
+        "CREATE TABLE reviews(id INT AUTO_INCREMENT PRIMARY KEY, user_id TEXT, course_id TEXT, rating DOUBLE, reviews LONGTEXT)")
+    db.close()
+
 
 def insert_courses_udemy_into_table():
     mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
@@ -54,7 +61,27 @@ def insert_courses_coursera_into_table():
     mydb.commit()
     cursor.close()
 
+def insert_reviews_into_table():
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
+    cursor = mydb.cursor()
+    with open('../Datasets/user-course-rating-review-final.csv',  newline='', encoding="utf-8") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            try:
+                cursor.execute(
+                    'INSERT INTO reviews(user_id, course_id, rating, reviews) VALUES("%s", "%s", "%s", "%s")',
+                [row['user_id'], row['course_id'], float(row['rating']), row['reviews']])
+            except Exception as e:
+                print(e)
+                print(row)
+                break
+    mydb.commit()
+    cursor.close()
+
 
 if __name__ == '__main__':
     # insert_courses_udemy_into_table()
-    insert_courses_coursera_into_table()
+    # insert_courses_coursera_into_table()
+    # create_review_table()
+    insert_reviews_into_table()

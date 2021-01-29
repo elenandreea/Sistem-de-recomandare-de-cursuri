@@ -48,11 +48,28 @@ export class BackendConnectionService {
   }
 
   getRecommandUsers(id : String): Observable<Course[]> {
-    const url = `${this.API_URL}recommandUsers`;
+    const url = `${this.API_URL}recommendUsers`;
     return this.http.post<Course[]>(url, JSON.stringify({'idCourse':id})).pipe(
       tap(_ => ''),
       catchError(this.handleError<Course[]>(`getRecommandUsers id=${id}`))
     );
+  }
+
+  getSimilarReview(id : String): Observable<Course[]> {
+    const url = `${this.API_URL}similarReview`;
+    return this.http.post<Course[]>(url, JSON.stringify({'idCourse':id})).pipe(
+      tap(_ => ''),
+      catchError(this.handleError<Course[]>(`getSimilarReview id=${id}`))
+    );
+  }
+
+  getCoursesWithFilters(filters): Observable<Course[]> {
+    const url =`${this.API_URL}coursesWithFilters`;
+    console.log(JSON.stringify({'filters':filters}))
+    return this.http.post<Course[]>(url,JSON.stringify({'filters':filters})).pipe(
+        tap(_ => ""),
+        catchError(this.handleError<Course[]>('getCoursesWithFilters', []))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

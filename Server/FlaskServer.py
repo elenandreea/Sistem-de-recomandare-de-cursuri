@@ -50,6 +50,7 @@ def course_by_id():
 @app.route("/similarCourses", methods=['POST', 'GET'])
 @cache.cached(timeout=50)
 def similar_courses():
+    # course_id = 3640
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
     result = get_similar_courses(course_id)
@@ -59,9 +60,9 @@ def similar_courses():
 @app.route("/similarReview", methods=['POST', 'GET'])
 @cache.cached(timeout=50)
 def similar_course_reviews():
-    course_id = 2969
-    # data = json.loads(request.data.decode())
-    # course_id = int(data["idCourse"])
+    # course_id = 3640
+    data = json.loads(request.data.decode())
+    course_id = int(data["idCourse"])
     result = get_similar_review_comments(course_id)
     return jsonify(result)
 
@@ -70,9 +71,20 @@ def similar_course_reviews():
 @cache.cached(timeout=50)
 def recommend_users():
     course_name = 'Getting Started with SAS Programming'
-    result = get_courses_by_ids(collaborative_users(course_name))
+    data = json.loads(request.data.decode())
+    course_id = int(data["idCourse"])
+    result = get_courses_by_ids(collaborative_users(course_id))
     return jsonify(result)
 
+
+@app.route("/coursesWithFilters", methods=['POST', 'GET'])
+@cache.cached(timeout=50)
+def courses_with_filters():
+    data = json.loads(request.data.decode())
+    filters = list(data["filters"])
+    result = get_courses_with_filters(filters)
+
+    return jsonify(result)
 
 if __name__ == "__main__":
     app.run()

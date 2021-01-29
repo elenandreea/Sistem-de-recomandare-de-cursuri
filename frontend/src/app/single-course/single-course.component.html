@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             <div class="col-4 attr_name">
-                Difficulty:
+                Difficulty
             </div>
             <div class="col-8 attr_prop">
                 {{course.difficulty}}
@@ -105,6 +105,33 @@
     </div>
     <div class="course_container">
         <app-recommended-course [course]=similarCourses[4]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[4]></app-course-list-elem> -->
+    </div>
+</div>
+
+<div class="row course_row similar_courses">
+    <h3>Similar review:</h3>
+</div>
+
+<div class="row course_row">
+    <div class="course_container">
+        <app-recommended-course [course]=similarReview[0]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[0]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course [course]=similarReview[1]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[1]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course [course]=similarReview[2]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[2]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course [course]=similarReview[3]></app-recommended-course>
+        <!-- <app-course-list-elem [course]=similarCourses[3]></app-course-list-elem> -->
+    </div>
+    <div class="course_container">
+        <app-recommended-course [course]=similarReview[4]></app-recommended-course>
         <!-- <app-course-list-elem [course]=similarCourses[4]></app-course-list-elem> -->
     </div>
 </div>

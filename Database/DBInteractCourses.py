@@ -150,3 +150,47 @@ def get_courses_by_ids_ms(ids):
         result.append(dict(zip(header, (d[0], name, d[2], website))))
 
     return result
+
+def get_courses_with_filters(filters):
+    mydb = mysql.connector.connect(host='localhost', user='root', passwd='admin', db='recommendation', use_unicode=True,
+                                   charset='utf8')
+    cursor = mydb.cursor()
+
+    query_where = 'WHERE 1'
+
+    for filter in filters:
+        filter = list(filter.items())
+
+        for (key, value) in filter:
+            if key == 'search' and value[0] != None:
+                query_where += ' AND name LIKE "%' + value[0] + '%"'
+            elif key == "rating" and value != []:
+                query_where += " AND rating > " + value[0]
+            elif value != []:
+                query_where += " AND (" + key + " = 1"
+                for val in value:
+                    query_where += " OR " + key + ' LIKE "%' + val + '%"'
+                query_where += ")"
+
+    query = 'SELECT id, name, url, rating, difficulty, tags, website, description FROM courses ' +query_where+ ' ORDER BY rating desc LIMIT 200 '
+    print(query)
+    try:
+        cursor.execute(query)
+    except Exception as e:
+        print(e)
+
+    header = [x[0] for x in cursor.description]
+    data = cursor.fetchall()
+    cursor.close()
+
+    result = []
+    for d in data:
+        name = d[1][1:-1]
+        url = d[2][1:-1]
+        difficulty = d[4][1:-1]
+        tags = d[5][1:-1]
+        website = d[6][1:-1]
+        description = d[7][1:-1]
+        result.append(dict(zip(header, (d[0], name, url, d[3], difficulty, tags, website, description))))
+
+    return result

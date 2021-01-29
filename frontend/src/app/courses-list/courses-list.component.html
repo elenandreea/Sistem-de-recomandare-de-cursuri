@@ -3,16 +3,16 @@
     <div class="left_side">
         <div>
             <h3>Search:</h3>
-            <input type="text" class="left_margin input_search" value="search" />
+            <input type="text" class="left_margin input_search" placeholder="Search by name..." />
         </div>
         <div>
             <h3>Website:</h3>
             <label>
-                <input type="checkbox" class="radio left_margin checkbox_website" value="udemy" /> Udemy
+                <input type="checkbox" class="radio left_margin checkbox_website" value="Udemy" /> Udemy
             </label>
             <br>
             <label>
-                <input type="checkbox" class="radio left_margin checkbox_website" value="coursera" /> Coursera
+                <input type="checkbox" class="radio left_margin checkbox_website" value="Coursera" /> Coursera
             </label>
         </div>
         <div>
@@ -73,12 +73,14 @@
                 <input type="checkbox" class="radio left_margin checkbox_categories" value="language_learning" /> Language Learning
             </label>
         </div>
-        <button type="button" class="button_search">Search</button>
+        <button type="button" class="button_search" (click)="getFilters()">Search</button>
     </div>
     <div class="right_side">
         <div class="row course_row">
-            <h2>Top 200 courses:</h2>
+            <h2 *ngIf="isTop">Top 200 courses:</h2>
+            <h2 *ngIf="!isTop">Search results:</h2>
         </div>
+        
         <div class="row course_row">
             <div class="course_container" *ngFor="let course of courses; let i = index">
                 <app-course-list-elem [course] = course ></app-course-list-elem>

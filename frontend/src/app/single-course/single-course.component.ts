@@ -17,6 +17,7 @@ export class SingleCourseComponent implements OnInit {
   courseId: number
   similarCourses: Course[]
   recommandUsers: Course[]
+  similarReview: Course[]
 
   constructor(private route: ActivatedRoute,private courseService: BackendConnectionService) {
    }
@@ -26,7 +27,8 @@ export class SingleCourseComponent implements OnInit {
     if(id) {
       this.getCourse(id);
       this.getSimilarCourses(id);
-      // this.getRecommandUsers(id);
+      this.getRecommandUsers(id);
+      this.getSimilarReview(id)
     }
     
   }
@@ -35,7 +37,7 @@ export class SingleCourseComponent implements OnInit {
     this.courseService.getCourse(id)
     .subscribe((course: Course) => {
       this.course = course;
-      this.getRecommandUsers(course.name)
+      // this.getRecommandUsers(course.name)
     });
   }
 
@@ -47,5 +49,11 @@ export class SingleCourseComponent implements OnInit {
   getRecommandUsers(id : String): void {
     this.courseService.getRecommandUsers(id)
     .subscribe(courses => this.recommandUsers = courses)
+  }
+
+  
+  getSimilarReview(id : String): void {
+    this.courseService.getSimilarReview(id)
+    .subscribe(courses => this.similarReview = courses)
   }
 }
