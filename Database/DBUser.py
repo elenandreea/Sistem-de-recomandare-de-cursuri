@@ -1,2 +1,5 @@
 def checkUser(username, password):
-    return "HI user"
+    if(username == "user" & password == "user"):
+        return "HI user"
+    else:
+        return False

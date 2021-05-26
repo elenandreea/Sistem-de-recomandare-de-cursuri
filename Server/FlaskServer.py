@@ -54,6 +54,7 @@ def similar_courses():
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
     result = get_similar_courses(course_id)
+    print(result)
     return jsonify(result)
 
 
@@ -63,6 +64,7 @@ def similar_course_reviews():
     # course_id = 3640
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
+
     result = get_similar_review_comments(course_id)
     return jsonify(result)
 
@@ -70,9 +72,11 @@ def similar_course_reviews():
 @app.route("/recommendUsers", methods=['POST', 'GET'])
 @cache.cached(timeout=50)
 def recommend_users():
-    course_name = 'Getting Started with SAS Programming'
+    # course_id = 3640
+
     data = json.loads(request.data.decode())
     course_id = int(data["idCourse"])
+
     result = get_courses_by_ids(collaborative_users(course_id))
     return jsonify(result)
 

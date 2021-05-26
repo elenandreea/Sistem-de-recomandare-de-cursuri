@@ -1,0 +1,17 @@
+For using this app, it requires 2 servers:
+1. A Python Server 
+a. It can be found in Proiect>>Server
+b. Easiest way to use it: Install PyCharm1 
+c. Access the file FlaskServer.py from the folder Proiect>>Server and run the main 
+2. An Angular Server
+a. Open a Command Prompt
+b. Navigate to the folder Proiect>>frontend
+c. Only the first time run: 
+i. npm install -g @angular/cli
+d. After the install is finished, start the server by running:
+i. ng serve
+e. Access on a browser:
+i. http://localhost:4200/
+1. jetbrains.com/pycharm/
+
+

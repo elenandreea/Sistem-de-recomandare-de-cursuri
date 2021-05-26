@@ -26,7 +26,7 @@ export class SingleCourseComponent implements OnInit {
     var id = this.route.snapshot.paramMap.get('courseId');
     if(id) {
       this.getCourse(id);
-      this.getSimilarCourses(id);
+      // this.getSimilarCourses(id);
       this.getRecommandUsers(id);
       this.getSimilarReview(id)
     }
